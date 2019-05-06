@@ -17,32 +17,32 @@ var censura = prompt("Inserisci 3 parole da censurare separate da uno spazio");
 var censuraArray = censura.split(" ");
 console.log(censuraArray);
 
-//controllo testo e applico censura
-
+// creo variabile di conteggio
 var counter = 0;
 
-function checkWords(array1, array2) {
-  for (var i = 0; i < array1.length; i++){
-    if (array1[i].includes(array2[0])) {
+//array che conterrà il nuovo testo
+var censuredText = [];
+
+//controllo testo e applico censura
+function checkWords(badwords, fulltext) {
+  for (var i = 0; i < fulltext.length; i++){
+    if (badwords.includes(fulltext[i])) {
+      censuredText.push("<strong>xxx</strong>");
       counter++;
-      array[i] = "xxx";
-    } else if (array1[i].includes(array2[1])) {
-      counter++;
-      array[i] = "xxx";
-    } else if (array1[i].includes(array2[2])) {
-      counter++;
-      array[i] = "xxx";
+    } else {
+      censuredText.push(fulltext[i]);
     }
   }
-  return counter;
 }
 
-checkWords(textArray, censuraArray);
 
+checkWords(censuraArray, textArray);
 console.log(counter);
 
-
 //stampa testo censuratore
-
+document.writeln("Il testo censurato è: </br>" + censuredText.join(' '));
 
 //stampa badword index
+var index = "La percentuale di parole censurate è del " + ((counter / textArray.length) * 100).toFixed(2) + "%";
+document.writeln("</br>Hai censurato " + counter + " parole su " + textArray.length);
+document.writeln("</br>" + index);
